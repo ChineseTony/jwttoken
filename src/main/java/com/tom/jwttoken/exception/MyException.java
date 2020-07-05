@@ -8,6 +8,18 @@ public class MyException extends Exception {
 
     private Result result;
 
+    public MyException(Throwable cause, Result result) {
+        super(cause);
+        this.result = result;
+    }
+
+    public MyException(Throwable cause, ResultCodeEnum resultCodeEnum) {
+        super(cause);
+        this.result = new Result(resultCodeEnum);
+    }
+
+
+
     public MyException(Result result) {
         this.result = result;
     }

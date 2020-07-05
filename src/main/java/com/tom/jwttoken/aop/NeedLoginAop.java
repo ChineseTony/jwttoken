@@ -51,7 +51,7 @@ public class NeedLoginAop {
     }
 
     @Around("doHander()")
-    public Object exception(ProceedingJoinPoint joinPoint) throws MyException {
+    public Object exception(ProceedingJoinPoint joinPoint) throws MyException{
         Object result = null;
         try {
             //进入controller层前
@@ -59,17 +59,15 @@ public class NeedLoginAop {
             //放行
             result = joinPoint.proceed();
             //返回数据前
-            afterPoint(joinPoint, result);
             return result;
         } catch (MyException e) {
-            throw new MyException(ResultCodeEnum.SYSTEM_ERROR);
-        } catch (Throwable e){
-            throw new MyException(ResultCodeEnum.SYSTEM_ERROR);
+            throw new MyException(e.getResult());
+        }catch (Throwable throwable) {
+            throw new MyException(throwable,ResultCodeEnum.SYSTEM_ERROR);
         }
-
     }
 
-    private Boolean beforePoint(ProceedingJoinPoint joinPoint) throws Exception {
+    private Boolean beforePoint(ProceedingJoinPoint joinPoint) throws MyException {
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         HttpServletRequest request = sra.getRequest();
