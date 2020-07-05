@@ -97,7 +97,6 @@ public class NeedLoginAop {
                     throw new MyException(ResultCodeEnum.TOKEN_NO_USERID);
                 }
                 User user = userService.findUserById(userId);
-                user.setPassword("");
                 // 验证 token  要和上面生成token的密钥一致才能解析成功
                 JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(
                         jwtProperties.getMiyao()+user.getPassword())).build();
@@ -107,6 +106,7 @@ public class NeedLoginAop {
                 } catch (JWTVerificationException e) {
                     throw new MyException(ResultCodeEnum.TOKEN_ERROR);
                 }
+                user.setPassword("");
                 //得到这个方法控制器的所有形参
                 Object[] args = joinPoint.getArgs();
                 for (Object argItem : args) {

@@ -7,7 +7,7 @@ public enum ResultCodeEnum {
     NO_TOKEN("0003","需要token"),
     TOKEN_NO_USERID("0004","token没有userID"),
     TOKEN_ERROR("0005","验证token失败"),
-    TOKEN_SUCCES("0006","验证token失败"),
+    TOKEN_SUCCESS("0006","验证token成功"),
     SYSTEM_ERROR("9999","系统异常");
 
 
