@@ -8,6 +8,7 @@ import com.tom.jwttoken.properties.JwtProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -31,7 +32,7 @@ public class JwtTokenUtils {
                 .withExpiresAt(date)
                 .sign(Algorithm.HMAC256(jwtProperties.getMiyao()+user.getPassword()));
         tokenEntity.setToken(token);
-        tokenEntity.setExpireTime(date.toString());
+        tokenEntity.setExpireTime(DateUtil.format(date));
         return tokenEntity;
     }
 
