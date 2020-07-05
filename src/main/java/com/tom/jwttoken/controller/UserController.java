@@ -36,8 +36,8 @@ public class UserController {
         boolean flag = userService.login(user);
         if (flag){
             TokenEntity token = jwtTokenUtils.makeToken(user);
-            result.setCode(ResultCodeEnum.LOGIN_SUCCESS.getCode());
-            result.setMessage(ResultCodeEnum.LOGIN_SUCCESS.getMsg());
+            result.setCode(ResultCodeEnum.TOKEN_SUCCES.getCode());
+            result.setMessage(ResultCodeEnum.TOKEN_SUCCES.getMsg());
             result.setData(token);
         }else {
             result.setCode(ResultCodeEnum.LOGIN_ERROR.getCode());
